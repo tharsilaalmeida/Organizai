@@ -1,254 +1,167 @@
 🎯 Canvas do Projeto Final — App Android
-Como usar: este é o primeiro documento do projeto. Preencha em grupo, em uma única aula, antes de escrever qualquer linha de código. Cada bloco tem no máximo 5 linhas — se não couber, o projeto está grande demais. Depois de preenchido e validado pelo professor, ele vira a base do PRD.md.
 
-
-
-
-
-Grupo nº
-As Fogueteiras
-Integrantes (3 a 4)
-Tharsila Caroline, Lavinya Hadassa, Ingrid Vitória, Maria Isadora
-Turma
-3º ano — Ensino Médio
-Repositório
-https://github.com/thata2008-max/Organiza-/settings/access?guidance_task=
-Data de preenchimento
-09/09/2026
-Entrega final
-10/12/2026
-
-
+Grupo: As Fogueteiras
+Integrantes: Tharsila Caroline, Lavinya Hadassa, Ingrid Vitória, Maria Isadora
+Turma: 3º ano — Ensino Médio
+Repositório: https://github.com/thata2008-max/Organiza-/settings/access?guidance_task=
+Data de preenchimento: 09/09/2026
+Entrega final: 10/12/2026
 
 🧩 Bloco 1 — Nome e pitch do app
-Nome do app: (máx. 30 caracteres — é o mesmo que vai na loja)
 
-Pitch em uma frase:
+Nome do app: Organizaí
 
-"O Organizaí ajuda vestibulandos do ENEM a organizarem sua rotina de estudos sem precisar perder tempo com conteúdo desnecessário ."
+Pitch:
+"O Organizaí ajuda vestibulandos do ENEM a organizarem sua rotina de estudos sem precisar perder tempo com conteúdo desnecessário."
 
 😖 Bloco 2 — Problema
-Qual dor real vocês estão resolvendo? Descrevam uma situação concreta que alguém vive hoje.
 
-Como esse problema é resolvido hoje (sem o app)?
-O Objetivo é auxiliar estudantes com foco em vestibulares a otimizar sua rotina de estudos com base no vestibular que eles querem passar sem perder tempo com o que não é cobrado.
+Qual dor real estamos resolvendo?
+Muitos estudantes têm dificuldade para organizar os estudos e acabam gastando tempo com conteúdos que não são prioritários para o vestibular desejado.
 
-Muitos alunos estudam conteúdos que não são cobrados e quando chegam na prova, sentem-se perdidos. 
-
+Como esse problema é resolvido hoje?
+Os estudantes pesquisam conteúdos em diferentes sites, vídeos e apostilas, muitas vezes sem saber quais assuntos devem priorizar.
 
 👥 Bloco 3 — Público-alvo
-Para quem é o app? Sejam específicos (idade, contexto, com que frequência usariam).
 
-Perfil principal: estudantes de ensino médio ou pós ensino médio; entre 15 e  20 anos, uso diário.
-Quando/onde usam: em casa/estudo pessoal
-Uma pessoa real que testaria o app: (Rebeka, 19 anos, vestibulanda de medicina)
+Perfil principal: estudantes do ensino médio ou pós-ensino médio, entre 15 e 20 anos, que estão se preparando para vestibulares.
 
+Quando/onde usam: em casa, na escola ou durante os estudos pessoais, principalmente de forma diária.
+
+Pessoa real que testaria o app: Rebeka, 19 anos, vestibulanda de Medicina.
 
 💡 Bloco 4 — Solução em uma tela
-Descreva o que a tela principal mostra e o que o usuário consegue fazer nela.
 
-A tela principal lista: blocos com os nomes das respectivas disciplinas.
-A ação principal do usuário é: entrar nos blocos 
-Depois de agir, o usuário vê: analisar a lista de conteúdos mais cobrados.
+Tela principal: mostra blocos com os nomes das disciplinas.
 
+Ação principal: o usuário entra no bloco da disciplina desejada.
 
-
+Depois da ação: o usuário visualiza os conteúdos mais cobrados e pode identificar quais assuntos priorizar nos estudos.
 
 ✅ Bloco 5 — Funcionalidades do MVP
-Máximo de 4 funcionalidades. Se tiver mais, corte. Lembre: qualidade acima de complexidade.
-
-#
-Funcionalidade
-Essencial?
-Quem faz
-F1
-
-
-Sim
-
-
-F2
-
-
-Sim
-
-
-F3
-
-
-Sim/Não
-
-
-F4
-
-
-Não
-
-
-
-
+#	Funcionalidade	Essencial?	Quem faz
+F1	Exibir as disciplinas na tela principal	- Sim -	Lavinya Hadassa
+F2	Exibir os conteúdos de cada disciplina- Sim	- Ingrid Vitória
+F3	Ordenar conteúdos pela frequência de cobrança	- Sim -	Tharsila Caroline
+F4	Marcar conteúdos como estudados -	Não	- Maria Isadora
 
 🚫 Bloco 6 — Fora do escopo
-O que o app não vai fazer nesta entrega. Escrever isso aqui protege vocês de perder o prazo.
 
-❌
-❌
-❌
-
-Sugestões comuns de coisas a deixar de fora: login/cadastro, notificações push, chat, mapa, pagamento, modo offline completo, sincronização em nuvem.
-
+❌ Login e cadastro de usuários.
+❌ Notificações e lembretes de estudo.
+❌ Chat ou interação entre estudantes.
 
 ⚙️ Bloco 7 — Caminho técnico
-Marque uma opção (as três valem a mesma nota):
 
-Opção A — Room: dados salvos no próprio celular (lista de compras, agenda, diário de treino, controle financeiro)
-Opção B — Retrofit: dados vindos de uma API pública (notícias, filmes, feed, clima)
-Opção C — Desafio: API + salvar favoritos localmente
+Opção escolhida: A — Room.
 
-Se escolheu B ou C — qual API? (link da documentação + precisa de chave? é gratuita?)
+Por quê?
+Os dados dos conteúdos e disciplinas serão armazenados localmente no celular, permitindo que o aplicativo funcione sem depender de uma API externa.
 
 Bibliotecas que o grupo vai usar:
+Jetpack Compose
+Room
+Kotlin Coroutines
+Android Jetpack
 
-Onde entra o try/catch? (qual operação pode falhar: banco vazio, internet caindo, API fora do ar, campo em branco)
+Onde entra o try/catch?
+Na leitura e gravação dos dados no banco Room, principalmente quando houver erro ao acessar ou carregar os conteúdos.
 
 Pode falhar:
-O usuário vê a mensagem:
+O banco pode apresentar erro ou não conseguir carregar os dados.
 
+O usuário vê a mensagem:
+"Não foi possível carregar os conteúdos. Tente novamente."
 
 🎨 Bloco 8 — Identidade visual
-Item
-Definição do grupo
-Nome exibido (strings.xml)
+Item	Definição do grupo
+Nome exibido (strings.xml): Organizaí
+Cor principal: #B1E5E6
+Ideia do ícone (512×512): Um foguete estilizado junto a elementos que representam organização e estudos
+applicationId	br.edu.ifpe.organizai
+Versão inicial	1.0 (versionCode 1)
 
-
-Cor principal (hex, em Color.kt)
-#______
-Ideia do ícone (512×512)
-
-
-applicationId
-br.edu.ifpe.______
-Versão inicial
-1.0 (versionCode 1)
-
-
+Identidade: visual jovem, simples e organizado, utilizando verde como cor principal e elementos relacionados a estudos e ao conceito de "foguete".
 
 👤 Bloco 9 — Equipe, papéis e riscos
-Integrante
-Papel principal
-Responsável por
+Integrante	Papel principal	Responsável por
+Tharsila Caroline	Dev / telas	Interfaces e navegação
+Lavinya Hadassa	Dev / dados	Banco Room e organização dos dados
+Ingrid Vitória	Design e identidade visual	Cores, ícone e aparência do app
+Maria Isadora	Documentação, build e entrega	README, documentação e builds
 
+Observação: todos programam e revisam o trabalho dos demais. Os papéis indicam quem acompanha principalmente cada área.
 
-Dev / telas
-
-
-
-
-Dev / dados (Room ou Retrofit)
-
-
-
-
-Design e identidade visual
-
-
-
-
-Documentação, build e entrega
-
-
-
-
-Todos programam. O "papel" define quem responde por aquela parte, não quem trabalha sozinho.
-
-Riscos — o que pode dar errado e o plano B:
-
-Risco
-Plano B
-
-
-
-
-
-
-
-
-
-
-
+Riscos:
+Risco	Plano B
+Banco Room apresentar erros	Usar uma estrutura de dados local mais simples temporariamente
+O projeto ficar maior que o prazo	Manter apenas F1, F2 e F3
+Problemas no build do APK/AAB	Testar builds menores e corrigir os erros antes do marco
+Algum integrante não entender uma parte do código	Fazer revisão em grupo e apresentação do código
 🤖 Bloco 10 — Acordo de trabalho com IA
-A implementação pode ser feita com o Gemini no Android Studio. Vocês orientam, ele digita — e cada integrante precisa saber explicar o que entrou no projeto. Regras completas em docs/USO_DE_IA.md.
+Três regras para o AGENTS.md:
 
-Três regras que vamos escrever no nosso AGENTS.md (o arquivo que diz à IA como trabalhar no nosso projeto):
+A IA deve explicar as alterações antes que o grupo aceite mudanças importantes.
 
-1. 2. 3.
+A IA não deve criar funcionalidades fora do escopo definido no Canvas e no PRD.
+
+Todo código gerado pela IA deve ser revisado e compreendido por pelo menos um integrante antes do uso.
 
 Combinados do grupo:
 
-Ninguém clica Accept no Agent Mode sem ler a mudança inteira.
+Ninguém clica em Accept no Agent Mode sem ler a mudança inteira.
+
 Quem aceitou o código escreve o comentário de fronteira do arquivo.
-Antes de cada marco, revisamos juntos: alguém aqui não entende alguma parte?
+
+Antes de cada marco, revisamos juntos e verificamos se alguém não entende alguma parte.
+
 Nenhuma chave de API ou senha vai para o prompt.
-Outro combinado nosso:
 
-Como vamos garantir que todos entendem tudo (ex.: quem implementa apresenta o arquivo aos outros; revezar as partes; revisar o pull request do colega):
+Antes de cada entrega, cada integrante deve explicar pelo menos uma parte do código para o restante do grupo.
 
+Como vamos garantir que todos entendem tudo:
+Quem implementar uma funcionalidade deverá apresentar o arquivo aos demais integrantes. O grupo também fará revisão dos Pull Requests dos colegas e revezará as tarefas sempre que possível.
 
 🗓️ Bloco 11 — Marcos até 10/12
-Marco
-Prazo
-Como se comprova no GitHub
-M1 — Canvas preenchido + repositório criado
-16/09
-CANVAS.md no main
-M2 — PRD aprovado + telas rascunhadas
-30/09
-PRD.md + imagens em docs/
-M3 — Funcionalidade base rodando
-21/10
-tela principal lista dados + 1 ação + try/catch
-M4 — Dados completos (Room/Retrofit) e erros tratados
-11/11
-commits da camada de dados
-M5 — Identidade visual + .apk de release testado
-25/11
-ícone, cores, .apk testado por 2 pessoas de fora
-M6 — .aab + material de loja + README.md
-02/12
-pasta loja/ + README.md completo
-Entrega e apresentação
-10/12
-tag v1.0 no repositório
-
-
-
+Marco	Prazo	Como se comprova no GitHub
+M1 — Canvas preenchido + repositório criado	16/09	CANVAS.md no main
+M2 — PRD aprovado + telas rascunhadas	30/09	PRD.md + imagens em docs/
+M3 — Funcionalidade base rodando	21/10	Tela principal lista dados + 1 ação + try/catch
+M4 — Dados completos (Room) e erros tratados	11/11	Commits da camada de dados
+M5 — Identidade visual + .apk de release testado	25/11	Ícone, cores e .apk testado por 2 pessoas de fora
+M6 — .aab + material de loja + README.md	02/12	Pasta loja/ + README.md completo
+Entrega e apresentação	10/12	Tag v1.0 no repositório
 🏁 Bloco 12 — Definição de pronto
-O grupo só considera o app pronto quando todas estas frases forem verdadeiras:
+
+O grupo só considera o app pronto quando:
 
 O app abre e não fecha sozinho depois de 5 minutos de uso.
-A tela principal mostra dados reais (não texto de exemplo fixo no código).
-A ação principal funciona e o resultado aparece na tela.
-Quando algo falha, aparece uma mensagem clara — o app não quebra.
-O app tem nome, ícone e cor próprios (nada de ícone padrão do Android).
-Duas pessoas de fora do grupo instalaram o .apk e conseguiram usar sem explicação.
-O README.md explica o que o app faz, com o que foi feito e como gerar o build.
-O docs/USO_DE_IA.md e o AGENTS.md estão preenchidos.
-Cada integrante consegue abrir o projeto e fazer uma mudança pequena sozinho — trocar um texto, acrescentar um campo, mudar a ordem da lista.
-Todo arquivo nosso tem o comentário de fronteira escrito por nós.
 
+A tela principal mostra dados reais, e não texto de exemplo fixo no código.
+
+A ação principal funciona e o resultado aparece na tela.
+
+Quando algo falha, aparece uma mensagem clara e o app não quebra.
+
+O app possui nome, ícone e cor próprios.
+
+Duas pessoas de fora do grupo instalaram o APK e conseguiram utilizá-lo sem explicação.
+
+O README.md explica o que o app faz, o que foi desenvolvido e como gerar o build.
+
+O docs/USO_DE_IA.md e o AGENTS.md estão preenchidos.
+
+Cada integrante consegue abrir o projeto e fazer uma pequena alteração sozinho.
+
+Todo arquivo criado pelo grupo possui o comentário de fronteira escrito pelos integrantes.
 
 ✍️ Validação do professor
 
+Data: //________
 
+Situação:
+( ) Aprovado
+( ) Aprovado com ajustes
+( ) Refazer
 
-
-Data
-
-
-Situação
-( ) Aprovado ( ) Aprovado com ajustes ( ) Refazer
-Observações
-
-
-
-
+Observações:
