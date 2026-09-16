@@ -1,167 +1,217 @@
-🎯 Canvas do Projeto Final — App Android
+🎯 PRD do Projeto — App Android
 
 Grupo: As Fogueteiras
 Integrantes: Tharsila Caroline, Lavinya Hadassa, Ingrid Vitória, Maria Isadora
 Turma: 3º ano — Ensino Médio
-Repositório: https://github.com/thata2008-max/Organiza-/settings/access?guidance_task=
+Nome do app: Organizaí
 Data de preenchimento: 09/09/2026
 Entrega final: 10/12/2026
 
-🧩 Bloco 1 — Nome e pitch do app
+🧩 Bloco 1 — Resumo do produto
+Nome do produto
 
-Nome do app: Organizaí
+Organizaí
 
-Pitch:
-"O Organizaí ajuda vestibulandos do ENEM a organizarem sua rotina de estudos sem precisar perder tempo com conteúdo desnecessário."
+Resumo
+
+O Organizaí é uma plataforma digital criada para auxiliar estudantes na organização de sua rotina de estudos. A proposta é reunir, em um único ambiente, ferramentas para planejamento, acompanhamento de tarefas e visualização do progresso acadêmico.
+
+O projeto busca tornar a rotina de estudos mais organizada e prática, permitindo que o estudante planeje seus horários, registre suas atividades e acompanhe seu desempenho ao longo do tempo.
 
 😖 Bloco 2 — Problema
+Qual problema estamos resolvendo?
 
-Qual dor real estamos resolvendo?
-Muitos estudantes têm dificuldade para organizar os estudos e acabam gastando tempo com conteúdos que não são prioritários para o vestibular desejado.
+Muitos estudantes têm dificuldade para organizar seus horários, controlar suas atividades e manter uma rotina constante de estudos.
+
+Atualmente, essas informações podem ficar espalhadas em cadernos, agendas, aplicativos diferentes ou anotações, dificultando o acompanhamento da rotina.
 
 Como esse problema é resolvido hoje?
-Os estudantes pesquisam conteúdos em diferentes sites, vídeos e apostilas, muitas vezes sem saber quais assuntos devem priorizar.
+
+Os estudantes costumam utilizar agendas, calendários, anotações no celular, cadernos ou diferentes aplicativos para organizar suas atividades.
+
+O Organizaí pretende centralizar essas informações em uma única plataforma, facilitando o planejamento e o acompanhamento dos estudos.
 
 👥 Bloco 3 — Público-alvo
+Perfil principal
 
-Perfil principal: estudantes do ensino médio ou pós-ensino médio, entre 15 e 20 anos, que estão se preparando para vestibulares.
+Estudantes do Ensino Fundamental;
 
-Quando/onde usam: em casa, na escola ou durante os estudos pessoais, principalmente de forma diária.
+Estudantes do Ensino Médio;
 
-Pessoa real que testaria o app: Rebeka, 19 anos, vestibulanda de Medicina.
+Estudantes de cursos técnicos;
+
+Pessoas que desejam organizar melhor sua rotina de estudos.
+
+Quando e onde utilizam?
+
+O aplicativo poderá ser utilizado durante a rotina diária de estudos, em casa, na escola ou em outros ambientes onde o estudante realize suas atividades.
 
 💡 Bloco 4 — Solução em uma tela
+Tela principal
 
-Tela principal: mostra blocos com os nomes das disciplinas.
+A tela principal permitirá que o usuário visualize sua organização de estudos, incluindo suas atividades e tarefas cadastradas.
 
-Ação principal: o usuário entra no bloco da disciplina desejada.
+Ação principal
 
-Depois da ação: o usuário visualiza os conteúdos mais cobrados e pode identificar quais assuntos priorizar nos estudos.
+O usuário poderá cadastrar, visualizar e organizar suas tarefas e atividades de estudo.
 
-✅ Bloco 5 — Funcionalidades do MVP
-#	Funcionalidade	Essencial?	Quem faz
-F1	Exibir as disciplinas na tela principal	- Sim -	Lavinya Hadassa
-F2	Exibir os conteúdos de cada disciplina- Sim	- Ingrid Vitória
-F3	Ordenar conteúdos pela frequência de cobrança	- Sim -	Tharsila Caroline
-F4	Marcar conteúdos como estudados -	Não	- Maria Isadora
+Depois da ação
 
-🚫 Bloco 6 — Fora do escopo
+O usuário poderá acompanhar quais atividades já foram realizadas, quais ainda estão pendentes e visualizar seu progresso ao longo do tempo.
 
-❌ Login e cadastro de usuários.
-❌ Notificações e lembretes de estudo.
-❌ Chat ou interação entre estudantes.
+✅ Bloco 5 — Funcionalidades do produto
+#	Funcionalidade	Essencial?
+F1	Criar uma conta e realizar login	Sim
+F2	Cadastrar materiais de estudo	Sim
+F3	Criar, editar e excluir tarefas	Sim
+F4	Marcar tarefas como concluídas	Sim
+F5	Visualizar atividades em um calendário	Sim
+F6	Acompanhar o progresso das atividades	Sim
+📋 Bloco 6 — Requisitos funcionais
 
-⚙️ Bloco 7 — Caminho técnico
+O sistema deve:
 
-Opção escolhida: A — Room.
+Permitir o cadastro de usuários;
 
-Por quê?
-Os dados dos conteúdos e disciplinas serão armazenados localmente no celular, permitindo que o aplicativo funcione sem depender de uma API externa.
+Permitir o login dos usuários;
 
-Bibliotecas que o grupo vai usar:
-Jetpack Compose
-Room
-Kotlin Coroutines
-Android Jetpack
+Permitir o cadastro de materiais;
 
-Onde entra o try/catch?
-Na leitura e gravação dos dados no banco Room, principalmente quando houver erro ao acessar ou carregar os conteúdos.
+Permitir a criação de tarefas;
 
-Pode falhar:
-O banco pode apresentar erro ou não conseguir carregar os dados.
+Permitir a edição de tarefas;
 
-O usuário vê a mensagem:
-"Não foi possível carregar os conteúdos. Tente novamente."
+Permitir a exclusão de tarefas;
 
-🎨 Bloco 8 — Identidade visual
-Item	Definição do grupo
-Nome exibido (strings.xml): Organizaí
-Cor principal: #B1E5E6
-Ideia do ícone (512×512): Um foguete estilizado junto a elementos que representam organização e estudos
-applicationId	br.edu.ifpe.organizai
-Versão inicial	1.0 (versionCode 1)
+Permitir que o usuário marque tarefas como concluídas;
 
-Identidade: visual jovem, simples e organizado, utilizando verde como cor principal e elementos relacionados a estudos e ao conceito de "foguete".
+Permitir a visualização das atividades em um calendário;
 
-👤 Bloco 9 — Equipe, papéis e riscos
+Apresentar informações sobre o progresso das atividades realizadas.
+
+⚙️ Bloco 7 — Requisitos não funcionais
+
+O aplicativo deve:
+
+Possuir uma interface simples e intuitiva;
+
+Apresentar bom desempenho;
+
+Proteger os dados dos usuários;
+
+Ser responsivo e adequado para computadores e dispositivos móveis;
+
+Apresentar mensagens claras quando ocorrer algum erro;
+
+Permitir que o usuário utilize as principais funcionalidades de maneira prática.
+
+🛠️ Bloco 8 — Caminho técnico
+Tecnologia prevista
+
+Kotlin + Android Studio
+
+Objetivo técnico
+
+O aplicativo será desenvolvido para Android utilizando Kotlin e as ferramentas disponibilizadas pelo Android Studio.
+
+Armazenamento
+
+Os dados necessários para o funcionamento do aplicativo serão armazenados de acordo com a estrutura definida durante o desenvolvimento.
+
+Tratamento de erros
+
+O sistema deverá tratar possíveis erros durante operações de cadastro, login, leitura, gravação ou carregamento de dados.
+
+Pode falhar
+
+Falha no carregamento dos dados;
+
+Erro ao salvar uma tarefa;
+
+Problemas durante o acesso às informações do usuário;
+
+Falhas relacionadas ao armazenamento dos dados.
+
+O usuário vê a mensagem
+
+"Não foi possível carregar os dados. Tente novamente."
+
+As mensagens de erro devem ser claras e impedir que o aplicativo seja encerrado inesperadamente.
+
+🎨 Bloco 9 — Identidade visual
+Item	Definição
+Nome exibido	Organizaí
+Tecnologia	Kotlin / Android Studio
+Plataforma	Android
+Versão inicial	1.0
+Interface	Simples e intuitiva
+Identidade
+
+O Organizaí deverá possuir uma identidade visual jovem, simples e organizada, transmitindo a ideia de planejamento, estudos e produtividade.
+
+👤 Bloco 10 — Equipe e responsabilidades
 Integrante	Papel principal	Responsável por
-Tharsila Caroline	Dev / telas	Interfaces e navegação
-Lavinya Hadassa	Dev / dados	Banco Room e organização dos dados
-Ingrid Vitória	Design e identidade visual	Cores, ícone e aparência do app
-Maria Isadora	Documentação, build e entrega	README, documentação e builds
+Tharsila Caroline	Desenvolvimento	Interfaces e funcionalidades
+Lavinya Hadassa	Desenvolvimento	Organização e implementação dos dados
+Ingrid Vitória	Design	Aparência e identidade visual
+Maria Isadora	Documentação	Documentação, build e entrega
 
-Observação: todos programam e revisam o trabalho dos demais. Os papéis indicam quem acompanha principalmente cada área.
+Observação: todos os integrantes programam e revisam o trabalho dos demais. Os papéis indicam quem acompanha principalmente cada área.
 
-Riscos:
-Risco	Plano B
-Banco Room apresentar erros	Usar uma estrutura de dados local mais simples temporariamente
-O projeto ficar maior que o prazo	Manter apenas F1, F2 e F3
-Problemas no build do APK/AAB	Testar builds menores e corrigir os erros antes do marco
-Algum integrante não entender uma parte do código	Fazer revisão em grupo e apresentação do código
-🤖 Bloco 10 — Acordo de trabalho com IA
-Três regras para o AGENTS.md:
+🚫 Bloco 11 — Objetivo da primeira versão
 
-A IA deve explicar as alterações antes que o grupo aceite mudanças importantes.
+A primeira versão do Organizaí deverá permitir que o usuário:
 
-A IA não deve criar funcionalidades fora do escopo definido no Canvas e no PRD.
+Crie uma conta;
 
-Todo código gerado pela IA deve ser revisado e compreendido por pelo menos um integrante antes do uso.
+Acesse sua conta;
 
-Combinados do grupo:
+Cadastre matérias ou materiais de estudo;
 
-Ninguém clica em Accept no Agent Mode sem ler a mudança inteira.
+Crie tarefas;
 
-Quem aceitou o código escreve o comentário de fronteira do arquivo.
+Edite e exclua tarefas;
 
-Antes de cada marco, revisamos juntos e verificamos se alguém não entende alguma parte.
+Marque tarefas como concluídas;
 
-Nenhuma chave de API ou senha vai para o prompt.
+Organize suas atividades;
 
-Antes de cada entrega, cada integrante deve explicar pelo menos uma parte do código para o restante do grupo.
+Visualize suas atividades em um calendário;
 
-Como vamos garantir que todos entendem tudo:
-Quem implementar uma funcionalidade deverá apresentar o arquivo aos demais integrantes. O grupo também fará revisão dos Pull Requests dos colegas e revezará as tarefas sempre que possível.
+Acompanhe seu progresso de estudos.
 
-🗓️ Bloco 11 — Marcos até 10/12
-Marco	Prazo	Como se comprova no GitHub
-M1 — Canvas preenchido + repositório criado	16/09	CANVAS.md no main
-M2 — PRD aprovado + telas rascunhadas	30/09	PRD.md + imagens em docs/
-M3 — Funcionalidade base rodando	21/10	Tela principal lista dados + 1 ação + try/catch
-M4 — Dados completos (Room) e erros tratados	11/11	Commits da camada de dados
-M5 — Identidade visual + .apk de release testado	25/11	Ícone, cores e .apk testado por 2 pessoas de fora
-M6 — .aab + material de loja + README.md	02/12	Pasta loja/ + README.md completo
-Entrega e apresentação	10/12	Tag v1.0 no repositório
-🏁 Bloco 12 — Definição de pronto
+🏁 Bloco 12 — Critérios de sucesso
 
-O grupo só considera o app pronto quando:
+O projeto será considerado funcional quando o usuário conseguir:
 
-O app abre e não fecha sozinho depois de 5 minutos de uso.
+Criar uma conta;
 
-A tela principal mostra dados reais, e não texto de exemplo fixo no código.
+Acessar sua conta;
 
-A ação principal funciona e o resultado aparece na tela.
+Cadastrar matérias;
 
-Quando algo falha, aparece uma mensagem clara e o app não quebra.
+Cadastrar materiais de estudo;
 
-O app possui nome, ícone e cor próprios.
+Criar tarefas;
 
-Duas pessoas de fora do grupo instalaram o APK e conseguiram utilizá-lo sem explicação.
+Editar tarefas;
 
-O README.md explica o que o app faz, o que foi desenvolvido e como gerar o build.
+Excluir tarefas;
 
-O docs/USO_DE_IA.md e o AGENTS.md estão preenchidos.
+Marcar tarefas como concluídas;
 
-Cada integrante consegue abrir o projeto e fazer uma pequena alteração sozinho.
+Visualizar sua organização de estudos;
 
-Todo arquivo criado pelo grupo possui o comentário de fronteira escrito pelos integrantes.
+Visualizar suas atividades em um calendário;
 
-✍️ Validação do professor
+Acompanhar seu progresso.
 
-Data: //________
+Definição de pronto
 
-Situação:
-( ) Aprovado
-( ) Aprovado com ajustes
-( ) Refazer
+O Organizaí será considerado pronto quando as principais funcionalidades estiverem funcionando corretamente, os dados forem apresentados de forma adequada e os erros forem tratados sem causar o encerramento do aplicativo.
 
-Observações:
+📌 Visão geral do MVP
+
+A primeira versão deverá priorizar uma experiência simples e funcional, concentrando-se em organização de estudos, gerenciamento de tarefas e acompanhamento do progresso.
+
+Funcionalidades futuras poderão ser adicionadas após a validação da primeira versão.
