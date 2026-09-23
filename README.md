@@ -1,89 +1,71 @@
-# Organizaí
+# 📦 Kit do Projeto Final — App Android
 
-## Briefing
+Material de apoio ao **Módulo 03 · Aula 6 — Projeto Final: Síntese**.
 
-O Organizaí é uma plataforma digital criada para auxiliar estudantes na organização de sua rotina de estudos. A proposta é reunir, em um único ambiente, ferramentas para planejamento, acompanhamento de tarefas e visualização do progresso acadêmico.
-
-O projeto busca tornar a rotina de estudos mais organizada e prática, permitindo que o estudante planeje seus horários, registre suas atividades e acompanhe seu desempenho ao longo do tempo.
-
-### Público-alvo
-
-Estudantes do Ensino Fundamental, Ensino Médio e demais pessoas que desejam organizar melhor sua rotina de estudos.
+**Turma:** 3º ano do Ensino Médio · **Formato:** grupos de 3 a 4 alunos · **Entrega:** 10/12/2026
 
 ---
 
-# PRD — Product Requirements Document
+## O que tem aqui
 
-## 1. Objetivo do produto
+| Arquivo | Para quê | Quando |
+|---|---|---|
+| [`CANVAS.md`](CANVAS.md) | Canvas de 12 blocos — a ideia inteira em uma página | M1 · até 16/09 |
+| [`PRD.md`](PRD.md) | Documento de requisitos: o que o app faz e por quê | M2 · até 30/09 |
+| [`RUBRICA.md`](RUBRICA.md) | Como o projeto será avaliado (produto 70% + compreensão 30%) | consulta contínua |
+| [`docs/USO_DE_IA.md`](docs/USO_DE_IA.md) | Como orientar o Gemini no Android Studio, perímetro explicável e registro obrigatório | contínuo |
+| [`docs/AGENTS_MODELO.md`](docs/AGENTS_MODELO.md) | Modelo do `AGENTS.md` — as regras que o grupo dá à IA | M1 · até 16/09 |
+| [`docs/GUIA_GITHUB.md`](docs/GUIA_GITHUB.md) | Repositório, branches, commits, Issues, tag de entrega | M1 em diante |
+| [`docs/README_MODELO.md`](docs/README_MODELO.md) | Modelo do `README.md` do app | M6 · até 02/12 |
 
-Criar uma plataforma simples e intuitiva que permita aos estudantes organizar seus estudos, acompanhar suas tarefas e visualizar seu progresso.
+---
 
-## 2. Problema
+## Como os alunos usam
 
-Muitos estudantes têm dificuldade para organizar horários, controlar atividades e manter uma rotina constante de estudos. O Organizaí pretende centralizar essas informações em uma única plataforma.
+1. **Formam o grupo** (3 a 4) e escolhem a opção técnica: **A** Room · **B** Retrofit · **C** ambas.
+2. **Preenchem o `CANVAS.md`** em sala, em uma aula. Nada de código antes disso.
+3. **Criam o repositório** seguindo o `docs/GUIA_GITHUB.md` e sobem o Canvas + o `AGENTS.md` do grupo.
+4. **Levam o Canvas para validação** do professor. Aprovado, transformam em `PRD.md`.
+5. **Quebram o PRD em Issues** e implementam com o Gemini no Android Studio, marco a marco, lendo e decidindo cada mudança.
+6. **Registram o uso de IA** em `docs/USO_DE_IA.md` e escrevem os comentários de fronteira em cada arquivo.
+7. **Fecham com a tag `v1.0`** e apresentam em 10/12, incluindo a mudança ao vivo.
 
-## 3. Público-alvo
+Copie os arquivos de template para o repositório de cada grupo (`CANVAS.md`, `PRD.md`, `RUBRICA.md`, `docs/`).
 
-* Estudantes do Ensino Fundamental;
-* Estudantes do Ensino Médio;
-* Estudantes de cursos técnicos;
-* Pessoas que desejam organizar sua rotina de estudos.
+---
 
-## 4. Funcionalidades principais
+## Marcos
 
-### 4.1 Cadastro e login
+| Marco | Prazo | Entrega |
+|---|---|---|
+| M1 | 16/09 | Repositório + `CANVAS.md` preenchido |
+| M2 | 30/09 | `PRD.md` aprovado + rascunho das telas |
+| M3 | 21/10 | Funcionalidade base: lista + ação + `try/catch` |
+| M4 | 11/11 | Room/Retrofit funcionando, erros tratados |
+| M5 | 25/11 | Identidade visual + `.apk` testado por gente de fora |
+| M6 | 02/12 | `.aab`, material de loja e `README.md` |
+| **Final** | **10/12** | Tag `v1.0` + apresentação de 10 minutos |
 
-O usuário poderá criar uma conta e acessar sua área pessoal.
+---
 
-### 4.2 Planejamento de estudos
+## Os três princípios
 
-O usuário poderá cadastrar matérias, horários e atividades que deseja realizar.
+1. **Qualidade acima de complexidade.** Um app pequeno, estável e bem acabado tira nota máxima.
+2. **Escopo fechado no papel primeiro.** O Canvas existe para dizer *não* a ideias que não cabem até 10/12.
+3. **Você dirige, a IA digita.** A implementação pode ser feita com o Gemini no Android Studio. A decisão do que construir, o que aceitar e o que rejeitar é do aluno — e é isso que a Parte 2 da rubrica mede.
 
-### 4.3 Lista de tarefas
+---
 
-O sistema permitirá criar, editar e marcar tarefas como concluídas.
+## Nota sobre a avaliação
 
-### 4.4 Calendário
+A nota tem duas partes, porque a implementação é assistida por IA:
 
-O usuário poderá visualizar suas atividades e compromissos de estudo em um calendário.
+```
+NOTA FINAL = Produto (grupo, 70%) + Compreensão e Autoria (individual, 30%)
+```
 
-### 4.5 Acompanhamento de progresso
+O **Produto** mantém os pesos do plano da disciplina — 40% funcionalidade e estabilidade, 20% persistência/tratamento de erros, 20% identidade, 20% artefatos e documentação.
 
-O sistema apresentará informações sobre as atividades concluídas e o progresso dos estudos.
+A **Compreensão** é individual e se apoia em três evidências: a **mudança ao vivo** na apresentação (uma alteração pequena e não anunciada, 10 minutos, com o Gemini liberado), a **defesa oral** do código pelo qual o aluno respondeu e o **rastro de autoria** no repositório. Detalhes e descritores em [`RUBRICA.md`](RUBRICA.md).
 
-## 5. Requisitos funcionais
-
-* O sistema deve permitir o cadastro de usuários.
-* O sistema deve permitir o login dos usuários.
-* O usuário deve poder cadastrar matérias.
-* O usuário deve poder criar e excluir tarefas.
-* O usuário deve poder marcar tarefas como concluídas.
-* O sistema deve permitir a visualização das atividades em um calendário.
-* O sistema deve apresentar o progresso das atividades realizadas.
-
-## 6. Requisitos não funcionais
-
-* A interface deve ser simples e intuitiva.
-* O sistema deve apresentar bom desempenho.
-* Os dados dos usuários devem ser protegidos.
-* A plataforma deve ser responsiva para computadores e dispositivos móveis.
-
-## 7. Tecnologias previstas
-
-* Kotlin, Android Studio.
-
-## 8. Objetivo da primeira versão
-
-A primeira versão do Organizaí deverá permitir que o usuário faça login, cadastre matérias e tarefas, organize suas atividades e acompanhe quais tarefas já foram concluídas.
-
-## 9. Critérios de sucesso
-
-O projeto será considerado funcional quando o usuário conseguir:
-
-1. Criar uma conta;
-2. Acessar sua conta;
-3. Cadastrar matérias;
-4. Criar tarefas;
-5. Marcar tarefas como concluídas;
-6. Visualizar sua organização de estudos;
-7. Acompanhar seu progresso.
+O objetivo do desenho é simples: um app bonito que ninguém sabe explicar não tira nota cheia, e um aluno que domina o próprio projeto não é penalizado por ter usado IA para escrevê-lo.
