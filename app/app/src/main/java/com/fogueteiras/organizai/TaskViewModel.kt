@@ -37,4 +37,17 @@ class TaskViewModel : ViewModel() {
             if (it.id == taskId) it.copy(isCompleted = !it.isCompleted) else it
         }
     }
+
+    fun addTask(title: String, subject: String, color: Color) {
+        val newTask = Task(
+            id = (_tasks.value.maxOfOrNull { it.id } ?: 0) + 1,
+            title = title,
+            subject = subject,
+            time = "12:00",
+            date = "2026-10-10", // Data padrão para o protótipo
+            isCompleted = false,
+            color = color
+        )
+        _tasks.value = _tasks.value + newTask
+    }
 }
