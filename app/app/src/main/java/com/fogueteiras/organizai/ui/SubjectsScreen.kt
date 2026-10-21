@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material3.*
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.fogueteiras.organizai.data.Subject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,7 +24,7 @@ fun SubjectsScreen() {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Minhas Matérias", fontWeight = FontWeight.Bold) }
+                title = { Text("Minhas Matérias", fontWeight = FontWeight.Black) }
             )
         }
     ) { innerPadding ->
@@ -51,13 +53,16 @@ fun SubjectsScreen() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SubjectCard(subject: Subject) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp),
-        colors = CardDefaults.cardColors(containerColor = subject.color)
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = subject.color),
+        onClick = { /* Navegar para detalhes */ }
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -75,8 +80,6 @@ fun SubjectCard(subject: Subject) {
         }
     }
 }
-
-data class Subject(val name: String, val color: Color)
 
 @Preview(showBackground = true)
 @Composable
