@@ -1,6 +1,7 @@
 package com.fogueteiras.organizai
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import com.fogueteiras.organizai.data.Task
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,10 +22,10 @@ class TaskViewModel : ViewModel() {
     private fun loadTasks() {
         try {
             _tasks.value = listOf(
-                Task(1, "Exercícios de Frações", "Matemática", "14:00", "2026-10-10", false, Color(0xFF81C784)),
-                Task(2, "Resumo: Segunda Guerra", "História", "16:30", "2026-10-10", true, Color(0xFFFFD54F)),
-                Task(3, "Análise de Poemas", "Português", "18:00", "2026-10-11", false, Color(0xFF64B5F6)),
-                Task(4, "Mapa Mental: Células", "Biologia", "20:00", "2026-10-12", false, Color(0xFFFF8A65))
+                Task(1, "Exercícios de Frações", "Revisão cap. 4", "Matemática", "2026-10-10", false, Color(0xFF81C784).toArgb()),
+                Task(2, "Resumo: Segunda Guerra", "Focar no Brasil", "História", "2026-10-10", true, Color(0xFFFFD54F).toArgb()),
+                Task(3, "Análise de Poemas", "Modernismo", "Português", "2026-10-11", false, Color(0xFF64B5F6).toArgb()),
+                Task(4, "Mapa Mental: Células", "Mitocôndrias", "Biologia", "2026-10-12", false, Color(0xFFFF8A65).toArgb())
             )
             _hasError.value = false
         } catch (e: Exception) {
@@ -42,11 +43,11 @@ class TaskViewModel : ViewModel() {
         val newTask = Task(
             id = (_tasks.value.maxOfOrNull { it.id } ?: 0) + 1,
             title = title,
+            description = "",
             subject = subject,
-            time = "12:00",
-            date = "2026-10-10", // Data padrão para o protótipo
+            dueDate = "2026-10-10", // Data padrão para o protótipo
             isCompleted = false,
-            color = color
+            colorHex = color.toArgb()
         )
         _tasks.value = _tasks.value + newTask
     }

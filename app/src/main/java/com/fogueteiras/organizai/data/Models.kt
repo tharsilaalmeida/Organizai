@@ -14,8 +14,3 @@ data class Task(
     val isCompleted: Boolean = false,
     val colorHex: Int = 0xFF81C784.toInt()
 )
-
-data class Subject(
-    val name: String,
-    val colorHex: Int
-)
