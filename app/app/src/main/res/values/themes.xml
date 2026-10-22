@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema base para o Organizaí -->
+    <style name="Theme.Organizai" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- O Compose define as cores programaticamente,
+             mas mantemos o XML para compatibilidade de sistema -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>
