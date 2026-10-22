@@ -3,52 +3,51 @@ package com.fogueteiras.organizai
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.fogueteiras.organizai.data.Subject
 import com.fogueteiras.organizai.data.Task
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.fogueteiras.organizai.repository.TaskRepository
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
-class TaskViewModel : ViewModel() {
-    private val _tasks = MutableStateFlow<List<Task>>(emptyList())
-    val tasks: StateFlow<List<Task>> = _tasks.asStateFlow()
+class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
 
-    private val _hasError = MutableStateFlow(false)
-    val hasError: StateFlow<Boolean> = _hasError.asStateFlow()
+    val tasks: StateFlow<List<Task>> = repository.allTasks
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    init {
-        loadTasks()
-    }
+    val subjects: StateFlow<List<Subject>> = repository.allSubjects
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    private fun loadTasks() {
-        try {
-            _tasks.value = listOf(
-                Task(1, "Exercícios de Frações", "Revisão cap. 4", "Matemática", "2026-10-10", false, Color(0xFF81C784).toArgb()),
-                Task(2, "Resumo: Segunda Guerra", "Focar no Brasil", "História", "2026-10-10", true, Color(0xFFFFD54F).toArgb()),
-                Task(3, "Análise de Poemas", "Modernismo", "Português", "2026-10-11", false, Color(0xFF64B5F6).toArgb()),
-                Task(4, "Mapa Mental: Células", "Mitocôndrias", "Biologia", "2026-10-12", false, Color(0xFFFF8A65).toArgb())
-            )
-            _hasError.value = false
-        } catch (e: Exception) {
-            _hasError.value = true
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
+
+    fun toggleTaskCompletion(task: Task) {
+        viewModelScope.launch {
+            try {
+                repository.updateTaskStatus(task.id, !task.isCompleted)
+            } catch (e: Exception) {
+                _errorMessage.value = "Não foi possível carregar os dados. Tente novamente."
+            }
         }
     }
 
-    fun toggleTaskCompletion(taskId: Int) {
-        _tasks.value = _tasks.value.map {
-            if (it.id == taskId) it.copy(isCompleted = !it.isCompleted) else it
+    fun addTask(title: String, subjectId: Int, color: Color) {
+        viewModelScope.launch {
+            try {
+                val newTask = Task(
+                    title = title,
+                    subjectId = subjectId,
+                    colorHex = color.toArgb(),
+                    isCompleted = false
+                )
+                repository.insertTask(newTask)
+            } catch (e: Exception) {
+                _errorMessage.value = "Não foi possível carregar os dados. Tente novamente."
+            }
         }
     }
-
-    fun addTask(title: String, subject: String, color: Color) {
-        val newTask = Task(
-            id = (_tasks.value.maxOfOrNull { it.id } ?: 0) + 1,
-            title = title,
-            description = "",
-            subject = subject,
-            dueDate = "2026-10-10", // Data padrão para o protótipo
-            isCompleted = false,
-            colorHex = color.toArgb()
-        )
-        _tasks.value = _tasks.value + newTask
+    
+    fun clearError() {
+        _errorMessage.value = null
     }
 }
