@@ -15,7 +15,9 @@ data class Task(
     val colorHex: Int = 0xFF81C784.toInt()
 )
 
+@Entity(tableName = "subjects")
 data class Subject(
+    @PrimaryKey
     val name: String,
     val colorHex: Int
 )

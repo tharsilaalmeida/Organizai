@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.toArgb
 import com.fogueteiras.organizai.TaskViewModel
 import com.fogueteiras.organizai.data.Task
 
@@ -62,7 +63,7 @@ fun HomeScreen(viewModel: TaskViewModel) {
             AddTaskDialog(
                 onDismiss = { showAddDialog = false },
                 onConfirm = { title, subject, color ->
-                    viewModel.addTask(title, subject, color)
+                    viewModel.addTask(title, subject, color.toArgb())
                     showAddDialog = false
                 }
             )
@@ -116,7 +117,7 @@ fun HomeScreen(viewModel: TaskViewModel) {
                     LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         items(tasks) { task ->
                             HomeTaskItem(task) {
-                                viewModel.toggleTaskCompletion(task.id)
+                                viewModel.toggleTaskCompletion(task)
                             }
                         }
                     }
@@ -201,7 +202,7 @@ fun HomeTaskItem(task: Task, onToggle: () -> Unit) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(modifier = Modifier.size(12.dp).background(task.color, CircleShape))
+                Box(modifier = Modifier.size(12.dp).background(Color(task.colorHex), CircleShape))
                 Spacer(modifier = Modifier.width(12.dp))
                 Column {
                     Text(
