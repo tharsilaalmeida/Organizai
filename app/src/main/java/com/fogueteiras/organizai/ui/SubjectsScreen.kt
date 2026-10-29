@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.toArgb
 import com.fogueteiras.organizai.data.Subject
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,12 +30,12 @@ fun SubjectsScreen() {
         }
     ) { innerPadding ->
         val subjects = listOf(
-            Subject("Matemática", Color(0xFFBBDEFB)),
-            Subject("Português", Color(0xFFF8BBD0)),
-            Subject("História", Color(0xFFFFF9C4)),
-            Subject("Geografia", Color(0xFFC8E6C9)),
-            Subject("Física", Color(0xFFD1C4E9)),
-            Subject("Química", Color(0xFFFFCCBC))
+            Subject("Matemática", Color(0xFFBBDEFB).toArgb()),
+            Subject("Português", Color(0xFFF8BBD0).toArgb()),
+            Subject("História", Color(0xFFFFF9C4).toArgb()),
+            Subject("Geografia", Color(0xFFC8E6C9).toArgb()),
+            Subject("Física", Color(0xFFD1C4E9).toArgb()),
+            Subject("Química", Color(0xFFFFCCBC).toArgb())
         )
 
         LazyVerticalGrid(
@@ -61,7 +62,7 @@ fun SubjectCard(subject: Subject) {
             .fillMaxWidth()
             .height(120.dp),
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = subject.color),
+        colors = CardDefaults.cardColors(containerColor = Color(subject.colorHex)),
         onClick = { /* Navegar para detalhes */ }
     ) {
         Box(

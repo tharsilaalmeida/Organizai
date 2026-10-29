@@ -83,11 +83,11 @@ fun CalendarScreen(viewModel: TaskViewModel) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Filtra tarefas para o "dia 10" (exemplo estático do protótipo)
-                val dailyTasks = tasks.filter { it.date == "2026-10-10" }
+                val dailyTasks = tasks.filter { it.dueDate == "2026-10-10" }
 
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     items(dailyTasks) { task ->
-                        TaskItemSimple(task.title, task.time, task.color)
+                        TaskItemSimple(task.title, "10:00", Color(task.colorHex))
                     }
                 }
             }
