@@ -1,14 +1,17 @@
-package com.fogueteiras.organizai.data
+package com.fogueteiras.organizai.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.fogueteiras.organizai.data.Subject
+import com.fogueteiras.organizai.data.Task
 
 @Database(entities = [Task::class, Subject::class], version = 2, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun taskDao(): TaskDao
-    abstract fun subjectDao(): SubjectDao
+    abstract fun organizaiDao(): OrganizaiDao
 
     companion object {
         @Volatile

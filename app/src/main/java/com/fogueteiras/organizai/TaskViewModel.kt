@@ -1,14 +1,17 @@
 package com.fogueteiras.organizai
 
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fogueteiras.organizai.data.Task
-import com.fogueteiras.organizai.data.TaskDao
+import com.fogueteiras.organizai.data.local.OrganizaiDao
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class TaskViewModel(private val taskDao: TaskDao) : ViewModel() {
-    val tasks: StateFlow<List<Task>> = taskDao.getAllTasks()
+class TaskViewModel(private val organizaiDao: OrganizaiDao) : ViewModel() {
+
+    val tasks: StateFlow<List<Task>> = organizaiDao.getAllTasks()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
@@ -21,7 +24,7 @@ class TaskViewModel(private val taskDao: TaskDao) : ViewModel() {
     fun toggleTaskCompletion(task: Task) {
         viewModelScope.launch {
             try {
-                taskDao.updateTask(task.copy(isCompleted = !task.isCompleted))
+                organizaiDao.updateTask(task.copy(isCompleted = !task.isCompleted))
                 _hasError.value = false
             } catch (e: Exception) {
                 _hasError.value = true
@@ -29,17 +32,17 @@ class TaskViewModel(private val taskDao: TaskDao) : ViewModel() {
         }
     }
 
-    fun addTask(title: String, subject: String, colorHex: Int) {
+    fun addTask(title: String, subject: String, color: Color) {
         viewModelScope.launch {
             try {
                 val newTask = Task(
                     title = title,
                     subject = subject,
-                    dueDate = "2026-10-10", // Data padrão para o protótipo
+                    dueDate = "2026-10-10",
                     isCompleted = false,
-                    colorHex = colorHex
+                    colorHex = color.toArgb()
                 )
-                taskDao.insertTask(newTask)
+                organizaiDao.insertTask(newTask)
                 _hasError.value = false
             } catch (e: Exception) {
                 _hasError.value = true
@@ -50,7 +53,7 @@ class TaskViewModel(private val taskDao: TaskDao) : ViewModel() {
     fun deleteTask(task: Task) {
         viewModelScope.launch {
             try {
-                taskDao.deleteTask(task)
+                organizaiDao.deleteTask(task)
                 _hasError.value = false
             } catch (e: Exception) {
                 _hasError.value = true
