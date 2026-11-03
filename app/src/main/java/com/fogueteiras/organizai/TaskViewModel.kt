@@ -1,3 +1,7 @@
+// O que faz: Gerencia o estado e as operações de tarefas aplicando os quatro estados (Carregando, Vazio, Erro, Sucesso).
+// Por que existe: Separa a lógica de negócios da UI e garante tratamento de exceções com try/catch.
+// O que quebra se sumir: A ViewModel deixa de emitir os estados e a tela não consegue processar os dados nem erros.
+
 package com.fogueteiras.organizai
 
 import androidx.compose.ui.graphics.Color
@@ -6,28 +10,45 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fogueteiras.organizai.data.Task
 import com.fogueteiras.organizai.data.local.OrganizaiDao
+import com.fogueteiras.organizai.ui.UiState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class TaskViewModel(private val organizaiDao: OrganizaiDao) : ViewModel() {
 
-    val tasks: StateFlow<List<Task>> = organizaiDao.getAllTasks()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
+    private val _estado = MutableStateFlow<UiState>(UiState.Carregando)
+    val estado: StateFlow<UiState> = _estado.asStateFlow()
 
-    private val _hasError = MutableStateFlow(false)
-    val hasError: StateFlow<Boolean> = _hasError.asStateFlow()
+    init {
+        carregar()
+    }
+
+    fun carregar() {
+        viewModelScope.launch {
+            _estado.value = UiState.Carregando
+            try {
+                organizaiDao.getAllTasks().collect { lista ->
+                    _estado.value = if (lista.isEmpty()) {
+                        UiState.Vazio
+                    } else {
+                        UiState.Sucesso(lista)
+                    }
+                }
+            } catch (e: IOException) {
+                _estado.value = UiState.Erro("Não foi possível carregar os dados. Tente novamente.")
+            } catch (e: Exception) {
+                _estado.value = UiState.Erro("Não foi possível carregar os dados. Tente novamente.")
+            }
+        }
+    }
 
     fun toggleTaskCompletion(task: Task) {
         viewModelScope.launch {
             try {
                 organizaiDao.updateTask(task.copy(isCompleted = !task.isCompleted))
-                _hasError.value = false
             } catch (e: Exception) {
-                _hasError.value = true
+                _estado.value = UiState.Erro("Não foi possível carregar os dados. Tente novamente.")
             }
         }
     }
@@ -43,9 +64,8 @@ class TaskViewModel(private val organizaiDao: OrganizaiDao) : ViewModel() {
                     colorHex = color.toArgb()
                 )
                 organizaiDao.insertTask(newTask)
-                _hasError.value = false
             } catch (e: Exception) {
-                _hasError.value = true
+                _estado.value = UiState.Erro("Não foi possível carregar os dados. Tente novamente.")
             }
         }
     }
@@ -54,9 +74,8 @@ class TaskViewModel(private val organizaiDao: OrganizaiDao) : ViewModel() {
         viewModelScope.launch {
             try {
                 organizaiDao.deleteTask(task)
-                _hasError.value = false
             } catch (e: Exception) {
-                _hasError.value = true
+                _estado.value = UiState.Erro("Não foi possível carregar os dados. Tente novamente.")
             }
         }
     }

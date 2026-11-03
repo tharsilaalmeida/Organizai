@@ -1,3 +1,7 @@
+// O que faz: Exibe o calendário e as tarefas do dia tratando os quatro estados da UI (Carregando, Vazio, Erro, Sucesso).
+// Por que existe: Permite visualização temporal das tarefas com tratamento robusto de erros e estados.
+// O que quebra se sumir: A tela de calendário falha ao compilar e exibir as tarefas baseadas no estado da ViewModel.
+
 package com.fogueteiras.organizai.ui
 
 import androidx.compose.foundation.background
@@ -16,18 +20,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fogueteiras.organizai.TaskViewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
+import com.fogueteiras.organizai.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarScreen(viewModel: TaskViewModel) {
-    val tasks by viewModel.tasks.collectAsState()
-    val hasError by viewModel.hasError.collectAsState()
+    val estado by viewModel.estado.collectAsState()
 
     Scaffold(
         topBar = {
@@ -41,53 +45,81 @@ fun CalendarScreen(viewModel: TaskViewModel) {
             )
         }
     ) { innerPadding ->
-        Column(
+        Box(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(16.dp)
         ) {
-            if (hasError) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(text = "Não foi possível carregar os dados. Tente novamente.", color = MaterialTheme.colorScheme.error)
-                }
-            } else {
-                // Seletor de Mês (Simplificado)
-                Text(
-                    text = "Outubro 2026",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-
-                // Linha de Dias da Semana
-                val days = (7..13).toList() // Exemplo de dias
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    items(days) { day ->
-                        DayItem(day = day.toString(), isSelected = day == 10)
+            when (val atual = estado) {
+                is UiState.Carregando -> {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
                     }
                 }
 
-                Spacer(modifier = Modifier.height(32.dp))
+                is UiState.Vazio -> {
+                    MensagemCentral(
+                        texto = stringResource(R.string.lista_vazia),
+                        rotuloBotao = stringResource(R.string.adicionar_primeiro),
+                        aoClicar = { /* Navegar para cadastro se necessário */ }
+                    )
+                }
 
-                Text(
-                    text = "Tarefas do dia",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                is UiState.Erro -> {
+                    MensagemCentral(
+                        texto = atual.mensagem,
+                        rotuloBotao = stringResource(R.string.tentar_novamente),
+                        aoClicar = { viewModel.carregar() }
+                    )
+                }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                is UiState.Sucesso -> {
+                    val tasks = atual.itens
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp)
+                    ) {
+                        // Seletor de Mês (Simplificado)
+                        Text(
+                            text = "Outubro 2026",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(bottom = 16.dp)
+                        )
 
-                // Filtra tarefas para o "dia 10" (exemplo estático do protótipo)
-                val dailyTasks = tasks.filter { it.dueDate == "2026-10-10" }
+                        // Linha de Dias da Semana
+                        val days = (7..13).toList()
+                        LazyRow(
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            items(days) { day ->
+                                DayItem(day = day.toString(), isSelected = day == 10)
+                            }
+                        }
 
-                LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    items(dailyTasks) { task ->
-                        TaskItemSimple(task.title, "10:00", Color(task.colorHex))
+                        Spacer(modifier = Modifier.height(32.dp))
+
+                        Text(
+                            text = "Tarefas do dia",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        val dailyTasks = tasks.filter { it.dueDate == "2026-10-10" }
+
+                        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            items(dailyTasks) { task ->
+                                TaskItemSimple(task.title, "10:00", Color(task.colorHex))
+                            }
+                        }
                     }
                 }
             }
@@ -134,13 +166,5 @@ fun TaskItemSimple(title: String, time: String, tagColor: Color) {
                 Text(time, fontSize = 12.sp, color = Color.Gray)
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CalendarScreenPreview() {
-    MaterialTheme {
-        CalendarScreen(viewModel = TaskViewModel())
     }
 }

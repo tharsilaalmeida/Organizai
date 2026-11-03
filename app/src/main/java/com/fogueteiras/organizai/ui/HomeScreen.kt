@@ -1,3 +1,7 @@
+// O que faz: Exibe a tela principal do Organizaí tratando os quatro estados da UI (Carregando, Vazio, Erro, Sucesso).
+// Por que existe: Evita telas em branco e fornece feedback visual claro com o botão Tentar novamente.
+// O que quebra se sumir: A interface deixa de reagir aos estados do ViewModel e a aplicação perde a renderização principal.
+
 package com.fogueteiras.organizai.ui
 
 import androidx.compose.foundation.background
@@ -15,23 +19,21 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.graphics.toArgb
+import com.fogueteiras.organizai.R
 import com.fogueteiras.organizai.TaskViewModel
 import com.fogueteiras.organizai.data.Task
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(viewModel: TaskViewModel) {
-    val tasks by viewModel.tasks.collectAsState()
-    val hasError by viewModel.hasError.collectAsState()
+    val estado by viewModel.estado.collectAsState()
     var showAddDialog by remember { mutableStateOf(false) }
-    
-    val completedCount = tasks.count { it.isCompleted }
-    val progress = if (tasks.isNotEmpty()) completedCount.toFloat() / tasks.size else 0f
 
     Scaffold(
         topBar = {
@@ -63,66 +65,122 @@ fun HomeScreen(viewModel: TaskViewModel) {
             AddTaskDialog(
                 onDismiss = { showAddDialog = false },
                 onConfirm = { title, subject, color ->
-                    viewModel.addTask(title, subject, color.toArgb())
+                    viewModel.addTask(title, subject, color)
                     showAddDialog = false
                 }
             )
         }
 
-        Column(
+        Box(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(16.dp)
         ) {
-            if (hasError) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "Não foi possível carregar os dados. Tente novamente.",
-                        color = MaterialTheme.colorScheme.error
+            when (val atual = estado) {
+                is UiState.Carregando -> {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+
+                is UiState.Vazio -> {
+                    MensagemCentral(
+                        texto = stringResource(R.string.lista_vazia),
+                        rotuloBotao = stringResource(R.string.adicionar_primeiro),
+                        aoClicar = { showAddDialog = true }
                     )
                 }
-            } else {
-                // Card de Progresso
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text("Seu Progresso de Hoje", fontSize = 18.sp, fontWeight = FontWeight.Medium)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        LinearProgressIndicator(
-                            progress = progress,
-                            modifier = Modifier.fillMaxWidth().height(8.dp),
-                            color = MaterialTheme.colorScheme.primary,
-                            trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                            strokeCap = androidx.compose.ui.graphics.StrokeCap.Round
-                        )
-                        Text("${(progress * 100).toInt()}% das tarefas concluídas", modifier = Modifier.padding(top = 8.dp), fontSize = 14.sp)
-                    }
+
+                is UiState.Erro -> {
+                    MensagemCentral(
+                        texto = atual.mensagem,
+                        rotuloBotao = stringResource(R.string.tentar_novamente),
+                        aoClicar = { viewModel.carregar() }
+                    )
                 }
 
-                Spacer(modifier = Modifier.height(24.dp))
+                is UiState.Sucesso -> {
+                    val tasks = atual.itens
+                    val completedCount = tasks.count { it.isCompleted }
+                    val progress = if (tasks.isNotEmpty()) completedCount.toFloat() / tasks.size else 0f
 
-                Text("Próximas Tarefas", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                
-                Spacer(modifier = Modifier.height(8.dp))
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp)
+                    ) {
+                        // Card de Progresso
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(20.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+                        ) {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Text("Seu Progresso de Hoje", fontSize = 18.sp, fontWeight = FontWeight.Medium)
+                                Spacer(modifier = Modifier.height(8.dp))
+                                LinearProgressIndicator(
+                                    progress = progress,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(8.dp),
+                                    color = MaterialTheme.colorScheme.primary,
+                                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
+                                    strokeCap = androidx.compose.ui.graphics.StrokeCap.Round
+                                )
+                                Text("${(progress * 100).toInt()}% das tarefas concluídas", modifier = Modifier.padding(top = 8.dp), fontSize = 14.sp)
+                            }
+                        }
 
-                if (tasks.isEmpty()) {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text("Nenhuma tarefa para hoje! 🚀", color = Color.Gray)
-                    }
-                } else {
-                    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        items(tasks) { task ->
-                            HomeTaskItem(task) {
-                                viewModel.toggleTaskCompletion(task)
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        Text("Próximas Tarefas", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        LazyColumn(
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            items(tasks) { task ->
+                                HomeTaskItem(task) {
+                                    viewModel.toggleTaskCompletion(task)
+                                }
                             }
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun MensagemCentral(
+    texto: String,
+    rotuloBotao: String,
+    aoClicar: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = texto,
+            textAlign = TextAlign.Center,
+            fontSize = 16.sp
+        )
+        Spacer(Modifier.height(16.dp))
+        Button(
+            onClick = aoClicar,
+            shape = RoundedCornerShape(20.dp)
+        ) {
+            Text(rotuloBotao)
         }
     }
 }
@@ -213,7 +271,7 @@ fun HomeTaskItem(task: Task, onToggle: () -> Unit) {
                     Text(task.subject, fontSize = 12.sp, color = Color.Gray)
                 }
             }
-            Checkbox(checked = task.isCompleted, onCheckedChange = { onToggle() })
+            Checkbox(checked = task.isCompleted, onCheckedChange = { _ -> onToggle() })
         }
     }
 }
