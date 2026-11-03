@@ -1,0 +1,10 @@
+<!-- O que faz: Armazena recursos de texto internacionalizáveis do aplicativo. -->
+<!-- Por que existe: Separa textos da UI do código Kotlin para atender aos requisitos do MVP. -->
+<!-- O que quebra se sumir: Referências a strings de erro, mensagens vazias e botões na UI. -->
+<resources>
+    <string name="app_name">Organizaí</string>
+    <string name="lista_vazia">Você ainda não cadastrou nenhuma tarefa. Toque no botão abaixo para começar.</string>
+    <string name="adicionar_primeiro">Adicionar a primeira</string>
+    <string name="tentar_novamente">Tentar novamente</string>
+    <string name="erro_generico">Não foi possível carregar os dados. Tente novamente.</string>
+</resources>

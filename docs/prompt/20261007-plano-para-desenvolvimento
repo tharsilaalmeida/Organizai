@@ -1,0 +1,32 @@
+# 🚀 Plano Simplificado — Organizaí
+
+## 1. 🎯 Resumo
+App Android (Kotlin/Compose/Material 3) para organização de estudos.
+- **Equipe:** Tharsila (UI), Lavinya (Dados), Ingrid (Design), Maria Isadora (Docs).
+- **Entrega:** 10/12/2026.
+
+## 2. 🛠️ Fases de Trabalho
+1. **Planejamento & Protótipo:** Alinhar PRD/Agents e validar visual.
+2. **Interfaces & Navegação:** Telas em Compose e fluxo entre elas.
+3. **Funcionalidades (MVP):** Login, Matérias, CRUD de Tarefas e Calendário.
+4. **Dados:** Implementar persistência local simples.
+5. **Integração & Testes:** Unir tudo e validar fluxos do PRD.
+6. **Correções & Entrega:** Ajustar bugs e gerar build final.
+
+## 3. 🚫 Limites e Proibições
+- **Não implementar:** IA, Chat, Social, Gamificação ou Nuvem.
+- **Foco:** Apenas o que está no PRD. Ideias novas = "Backlog Futuro".
+- **Erros:** Mensagem fixa: *"Não foi possível carregar os dados. Tente novamente."*
+
+## 4. ⚠️ Riscos Principais
+- **Escopo:** Não adicionar funções extras.
+- **Integração:** Não trabalhar isolado; integrar o código frequentemente.
+- **Complexidade:** Sempre preferir a solução mais simples.
+
+## 5. ✅ Definição de Pronto (DoD)
+1. Código funciona e foi revisado.
+2. Interface segue o design da Ingrid.
+3. Não quebra funcionalidades anteriores.
+
+---
+**Regra de Ouro:** Não adicione complexidade sem necessidade. Se não está no PRD, não faça agora.
