@@ -30,10 +30,10 @@ Uso previsto durante a rotina diária de estudos — em casa, na escola ou em ou
 |---|---|
 | Criar uma conta e realizar login | Essencial |
 | Cadastrar materiais de estudo | Essencial |
-| Criar, editar e excluir tarefas | Essencial |
-| Marcar tarefas como concluídas | Essencial |
-| Visualizar atividades em um calendário | Essencial |
-| Acompanhar o progresso das atividades | Essencial |
+| Criar, editar e excluir tarefas | **Concluído ✅** |
+| Marcar tarefas como concluídas | **Concluído ✅** |
+| Visualizar atividades em um calendário | **Concluído ✅** |
+| Acompanhar o progresso das atividades | **Concluído ✅** |
 
 ## 🛠️ Tecnologias
 
